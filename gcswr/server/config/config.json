@@ -1,0 +1,11 @@
+{
+    "dev":{
+    "username": "root",
+    "password": "bingo",
+    "database": "myweb",
+    "host":"localhost",
+    "port":3306,
+    "dialect":"mysql",
+    "connectionLimit": 20
+    }
+}

@@ -1,0 +1,126 @@
+{% extends "base.html" %} {% block main %}
+{{data}}
+<div class="container">
+<ul id="myTab" class="nav nav-tabs">
+        <li class="active" style="margin-left:1em">
+                <a href="#rkxx" data-toggle="tab">
+                    入库表
+                    </a>
+        </li>
+        <li style="margin-left:1em"><a href="#ckxx" data-toggle="tab">出库表</a></li>
+        <li style="margin-left:1em" ><a href="#kcxx" data-toggle="tab">库存表</a></li>
+    </ul>
+    <div id="myTabContent" class="tab-content">
+        <div class="tab-pane fade active show" id="rkxx">
+                <table id="rkxxTable" class="text-center"></table>
+                <form id = "rkxxform" class="form-inline" role="form" method="POST"> 
+                        <div class="form-group">
+                           <label class="sr-only" for="rkbh">名称</label>
+                          <input type="text" class="form-control" id="rkbh" name ="rkbh"
+                              placeholder="入库编号">
+                         </div>
+                         <div class="form-group">
+                                <label class="sr-only" for="pp">名称</label>
+                               <input type="text" class="form-control" id="lb" name="lb"
+                                   placeholder="类别">
+                              </div>
+                         <div class="form-group">
+                                <label class="sr-only" for="pp">名称</label>
+                               <input type="text" class="form-control" id="pp" name="pp"
+                                   placeholder="品牌">
+                              </div>
+                        <div class="form-group">
+                           <label class="sr-only" for="xh">名称</label>
+                          <input type="text" class="form-control" id="xh" name = "xh"
+                              placeholder="型号">
+                         </div>
+                         <div class="form-group">
+                                <label class="sr-only" for="sl">名称</label>
+                               <input type="float" class="form-control" id="sl" name = "sl"
+                                   placeholder="数量">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="dj">名称</label>
+                               <input type="number" class="form-control" id="dj" name = "dj"
+                                   placeholder="单价">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="cgr">名称</label>
+                               <input type="text" class="form-control" id="cgr" name = "cgr"
+                                   placeholder="采购人">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="rkr">名称</label>
+                               <input type="text" class="form-control" id="rkr" name = "rkr"
+                                   placeholder="入库人">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="rkrq">名称</label>
+                               <input type="date" class="form-control" id="rkrq" name = "rkrq"
+                                   placeholder="入库日期">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="rkrq">名称</label>
+                               <input type="text" class="form-control" id="kcwz" name = "kcwz"
+                                   placeholder="库存位置">
+                        </div>
+                        <button type="button" id="rkxxsubmit" class="btn btn-success">新增</button>
+                        </form>          
+            </div>
+        <div class="tab-pane fade" id="ckxx">
+                <table id="ckxxTable" class="text-center"></table>
+                <form  style = "margin-top: 50px;" id = "ckxxform" class="form-inline" role="form" method="POST"> 
+                        <div class="form-group">
+                           <label class="sr-only" for="rkbh">名称</label>
+                          <input type="text" class="form-control" id="rkbh" name = "rkbh"
+                              placeholder="入库编号">
+                         </div>
+                         <div class="form-group">
+                                <label class="sr-only" for="pp">名称</label>
+                               <input type="text" class="form-control" id="lb" name = "lb"
+                                   placeholder="类别">
+                              </div>
+                         <div class="form-group">
+                                <label class="sr-only" for="pp">名称</label>
+                               <input type="text" class="form-control" id="pp" name = "pp"
+                                   placeholder="品牌">
+                              </div>
+                        <div class="form-group">
+                           <label class="sr-only" for="xh">名称</label>
+                          <input type="text" class="form-control" id="xh" name = "xh"
+                              placeholder="型号">
+                         </div>
+                         <div class="form-group">
+                                <label class="sr-only" for="sl">名称</label>
+                               <input type="float" class="form-control" id="cksl" name = "sl"
+                                   placeholder="数量">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="lybm">名称</label>
+                               <input type="text" class="form-control" id="lybm" name = "lybm"
+                                   placeholder="领用部门">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="lyr">名称</label>
+                               <input type="text" class="form-control" id="lyr" name = "lyr"
+                                   placeholder="领用人">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="lyrq">名称</label>
+                               <input type="date" class="form-control" id="lyrq" name = "lyrq"
+                                   placeholder="领用日期">
+                        </div>
+                        <div class="form-group">
+                                <label class="sr-only" for="ckr">名称</label>
+                               <input type="text" class="form-control" id="ckr" name = "ckr"
+                                   placeholder="出库人">
+                        </div>
+                        <button type="button" id="ckxxsubmit" class="btn btn-success">新增</button>
+                        </form>      
+        </div>
+        <div class="tab-pane" id="kcxx">
+                <table id="kcxxTable" class="text-center"></table>
+        </div>
+        </div>
+        </div>
+{% endblock %}
