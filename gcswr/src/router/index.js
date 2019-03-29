@@ -21,7 +21,25 @@ export default new router({
         {
           path: '/langart',
           component: resolve => require(['../components/pages/LangArt.vue'],resolve)
-        }
+        },
+        {
+          path: '/piction',
+          component: resolve => require(['../components/pages/Piction.vue'],resolve)
+        },
+        {
+          path: '/sport',
+          component: resolve => require(['../components/pages/Sport.vue'],resolve)
+        },
+        {
+          path: '/userCenter',
+          component: resolve => require(['../components/pages/userCenter.vue'],resolve)
+        },
+        {
+          path: '/modifyPass',
+          component: resolve => require(['../components/pages/modifyPass.vue'],resolve)
+        },
+
+
       ]
     },
   ]

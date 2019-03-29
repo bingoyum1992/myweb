@@ -1,12 +1,17 @@
 <template>
-   <div class="wrapper">
-       <h1>home</h1>
+   <el-container>
+       <el-header>
    <head-nav></head-nav>
-   <div class="content">
+       </el-header>
+       <el-main>
        <transition name = "move" mode="out-in"><router-view></router-view></transition>
-
-   </div>
-   </div>
+       </el-main>
+   <el-footer>
+       <p>
+           国家税务总局贵阳市云岩区税务局
+       </p>
+   </el-footer>
+      </el-container>
 </template>
 
 <script>
@@ -19,5 +24,26 @@ import HeadNav from './pages/HeadNav.vue'
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
-
+.el-header, .el-footer {
+    text-align: center;
+    line-height: 60px;
+  }
+  .el-main {
+    background-color: #E9EEF3;
+    color: #333;
+    text-align: center;
+    line-height: 160px;
+    height: 100%;
+  }
+  .el-footer{
+      position:absolute;
+      bottom:0;
+      width:1366px;
+      color: #333;
+    background-color: #B3C0D1;
+  }
+  p{
+      font-family: "微软雅黑";
+      padding-bottom: 30px;
+  }
 </style>
