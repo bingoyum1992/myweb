@@ -4,10 +4,10 @@
    <head-nav></head-nav>
        </el-header>
        <el-main>
-       <transition name = "move" mode="out-in"><router-view></router-view></transition>
+       <transition name = "move" mode="out-in"><keep-alive><router-view></router-view></keep-alive></transition>
        </el-main>
    <el-footer>
-       <p>
+       <p class="foot">
            国家税务总局贵阳市云岩区税务局
        </p>
    </el-footer>
@@ -23,10 +23,9 @@ import HeadNav from './pages/HeadNav.vue'
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  scoped>
+<style>
 .el-header, .el-footer {
     text-align: center;
-    line-height: 60px;
   }
   .el-main {
     background-color: #E9EEF3;
@@ -42,8 +41,8 @@ import HeadNav from './pages/HeadNav.vue'
       color: #333;
     background-color: #B3C0D1;
   }
-  p{
+  .foot{
       font-family: "微软雅黑";
-      padding-bottom: 30px;
+      padding-bottom: 20px;
   }
 </style>

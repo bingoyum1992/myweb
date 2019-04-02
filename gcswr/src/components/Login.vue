@@ -40,7 +40,7 @@ export default {
 							type:'success',
 							message:'登录成功！'
 						})
-            sessionStorage.setItem('username', res.data.data[0].swry_dm)
+            sessionStorage.setItem('username', res.data.data[0].name)
             this.$router.push('/welcome')
           }
         })

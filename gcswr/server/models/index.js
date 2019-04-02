@@ -31,39 +31,20 @@ let query = function(sql,values){
     });
 }
 let user = `create table if not exists user(
-    swry_dm not null primary key,
-    password varchar(200)
+    name varchar(200) not null primary key,
+    password varchar(200),
+    age int,
+    sex int,
+    phone varchar(100),
+    intro varchar(200)
 )`
-let gdzc_rkxx = `create table if not exists gdzc_rkxx(
-    id int not null auto_increment primary key,
-    rkbh varchar(200),
-    lb varchar(200),
-    pp varchar(200),
-    xh varchar(200),
-    sl int,
-    dj int,
-    cgr varchar(200),
-    rkrq date,
-    rkr varchar(200),
-    kcwz varchar(200)
-)`;
-let gdzc_ckxx = `create table if not exists gdzc_ckxx(
-    id int not null auto_increment primary key,
-    rkbh varchar(200),
-    lb varchar(200),
-    pp varchar(200),
-    xh varchar(200),
-    sl int,
-    lybm varchar(200),
-    lyr varchar(200),
-    lyrq date,
-    ckr varchar(200)
-)`
+let inituser = `insert into user(name,password,age,sex,phone,intro) value(
+    '任斌','123456',26,1,'18184100612','信息中心瓦都是')`;
 let createTable =  function(sql){
     return query(sql,[]);
 }
-createTable(gdzc_rkxx);
-createTable(gdzc_ckxx);
+createTable(user);
+
 let insertUser = function(value){
     let _sql = "insert into user set swry_dm=?,swryxm=?,password=?,yddh=?;";
     return query(_sql,value);
@@ -109,6 +90,10 @@ let insertCkxx = function(value){
     let _sql = `insert into gdzc_ckxx(rkbh,lb,pp,xh,sl,lybm,lyr,lyrq,ckr) values(?,?,?,?,?,?,?,?,?)`;
     return query(_sql,value);
 }
+let getUserData = function(name){
+    let _sql = `select * from user where name='${name}'`;
+    return query(_sql)
+}
 module.exports = {
     query,
     insertUser,
@@ -122,5 +107,6 @@ module.exports = {
     findAllKcxx,
     insertRkxx,
     insertCkxx,
-    query:query
+    query:query,
+    getUserData:getUserData
 }
