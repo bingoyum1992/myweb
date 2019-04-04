@@ -28,14 +28,12 @@ import HeadNav from './pages/HeadNav.vue'
     text-align: center;
   }
   .el-main {
-    background-color: #E9EEF3;
+    /* background-color: #E9EEF3; */
     color: #333;
     text-align: center;
-    line-height: 160px;
     height: 100%;
   }
   .el-footer{
-      position:absolute;
       bottom:0;
       width:1366px;
       color: #333;

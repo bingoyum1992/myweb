@@ -3,15 +3,15 @@
         <el-row>
             <el-input
                 v-model="name"
-                placeholder="账号"
+                placeholder="密码"
                 type="text">
             </el-input>
             <el-input
                 v-model="password"
-                placeholder="密码"
+                placeholder="确认密码"
                 type="password">
             </el-input>
-            <el-button type='primary' @click="login">登录</el-button>
+            <el-button type='primary' @click="login">确认</el-button>
         </el-row>
     </el-row>
 </template>
@@ -53,7 +53,7 @@ export default {
 <style  scoped>
 .el-row.content{
     padding:16px;
-    width: 40%;
+    width: 40%; 
     margin: auto;
 }
 .title{

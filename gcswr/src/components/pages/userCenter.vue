@@ -1,21 +1,29 @@
 <template>
-    <div class="userCenter">
+    <el-row class="content">
         <el-form ref="form" :v-model="form" :rules="rules">
         <el-form-item prop="name" label="用户名称">
+             <el-col :span="12">
             <el-input v-model="form.name" disabled></el-input>
+            </el-col>
         </el-form-item>
         <el-form-item prop="sex" label="性别">
+            <el-col :span="12">
             <el-select v-model="form.sex">
                 <el-option label="少侠" value=1></el-option>
                 <el-option label="女侠" value=2></el-option>
 
             </el-select>
+            </el-col>
         </el-form-item>
         <el-form-item prop="age" label="年龄">
+            <el-col :span="12">
             <el-input v-model="form.age"></el-input>
+            </el-col>
         </el-form-item>
         <el-form-item prop="phone" label="手机号码">
+            <el-col :span="12">
             <el-input v-model="form.phone"></el-input>
+            </el-col>
         </el-form-item>
         <el-form-item prop="intro" label="自我描述">
             <el-input  type = "text" v-model="form.intro"></el-input>
@@ -26,7 +34,7 @@
 
         </el-form-item>
         </el-form>
-    </div>
+    </el-row>
 </template>
 
 <script>
@@ -61,7 +69,7 @@ export default {
                 console.log(result);	
             self.form.name = result.name
             self.form.age = result.age;
-            self.form.sex = result.sex;
+            self.form.sex = (result.sex===1)?'少侠':'女侠';
             self.form.phone = result.phone;
             self.form.intro = result.intro;
           }
@@ -91,5 +99,8 @@ font-size: 28px;
 }
 .el-button{
     margin-top:12px
+}
+.el-form{
+    margin:auto;
 }
 </style>
