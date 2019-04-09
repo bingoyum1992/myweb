@@ -1,9 +1,9 @@
 <template>
-  <el-menu  background-color="#8f97ff" text-color="#fff" active-text-color="#ffd04b" :default-active= "activeIndex" class="el-menu-demo" mode="horizontal" :router= "true">
-  <el-menu-item index="Langart">处理中心</el-menu-item>
-    <el-menu-item index="Piction">订单管理</el-menu-item>
-  <el-menu-item index="Sport">订单管理</el-menu-item>
-    <el-menu-item index="Sport">订单管理</el-menu-item>
+  <el-menu  id = "nav" background-color="#8f97ff" text-color="#fff" active-text-color="#ffd04b" :default-active= "onRoutes" class="el-menu-demo" mode="horizontal" :router= "true">
+  <el-menu-item index="welcome">首页中心</el-menu-item>
+    <el-menu-item index="Piction">党建活动</el-menu-item>
+  <el-menu-item index="Sport">税收动态</el-menu-item>
+    <el-menu-item index="Manage">管理中心</el-menu-item>
       <el-submenu class = "user-info" index="2">
     <template slot="title">{{username}}</template>
     <el-menu-item index="userCenter">个人中心</el-menu-item>
@@ -25,8 +25,11 @@
       username(){
       let username = sessionStorage.getItem('username');
       return username;
-    }
-    },  
+    },
+      onRoutes(){
+        return this.$route.path.replace('/',''); 
+      }    
+    },
     methods: {
       loginOut(){
         sessionStorage.removeItem('username');

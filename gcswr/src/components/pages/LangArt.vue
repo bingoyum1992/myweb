@@ -4,10 +4,10 @@
     <el-card :body-style="{ padding: '0px' }" @click="articleDetail">
     <img src="../../assets/logo.png" class="image">
       <div style="padding: 14px;">
-        <span>好吃的汉堡</span>
+        <span>云岩区税务局文章</span>
         <div class="bottom clearfix">
           <time class="time">{{ currentDate }}</time>
-          <el-button type="text" class="button">操作按钮</el-button>
+          <!-- <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
       </div>
     </el-card>
@@ -36,7 +36,7 @@
 <style  scoped>
 .el-card{
     width: 430px;
-    height:640px;
+    height:56 0px;
     margin-bottom: 10px;
 }
  .time {

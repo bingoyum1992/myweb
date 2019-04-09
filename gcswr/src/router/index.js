@@ -19,7 +19,7 @@ export default new router({
       component: Home,
       children:[
         {
-          path: '/langart',
+          path: '/',
           component: resolve => require(['../components/pages/LangArt.vue'],resolve)
         },
         {
