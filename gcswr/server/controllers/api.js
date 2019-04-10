@@ -48,29 +48,28 @@ var getKcxx = async (ctx, next) => {
             console.log(err);
         });
 }
-var insertRkxx = async (ctx, next) => {
+var addArticle = async (ctx, next) => {
     /* let
         name = ctx.request.body.name; */
         console.log(ctx.request.body);
         console.log(ctx.request.body["rkbh"]);
-        let rkbh = ctx.request.body["rkbh"],
-        lb = ctx.request.body["lb"],
-        pp = ctx.request.body["pp"],
-        xh = ctx.request.body["xh"],
-        sl = ctx.request.body["sl"],
-        dj = ctx.request.body["dj"],
-        cgr = ctx.request.body["cgr"],
-        rkrq =ctx.request.body["rkrq"],
-        rkr = ctx.request.body["rkr"],
-        kcwz = ctx.request.body["kcwz"];
-    await userModel.insertRkxx([rkbh,lb,pp,xh,sl,dj,cgr,rkrq,rkr,kcwz])
+        let title = ctx.request.body["title"],
+        keyword = ctx.request.body["keyword"],
+        content = ctx.request.body["content"],
+        insertname = ctx.request.body["username"]
+    await userModel.addArticle([title,keyword,content,insertname])
         .then(result =>{
             let res = result;
             console.log(res);
             if(res.length === 0 ){
-                ctx.body = "null";
+                ctx.body = {
+                    code:-1,
+                    data:res
+                }
             }else{
-                ctx.body = res;
+                ctx.body = {
+                    code:1
+                };
             }
         }).catch(err=>{
             console.log(err);
@@ -107,7 +106,7 @@ module.exports = {
     'GET /api/getRkxx': getRkxx,
     'GET /api/getCkxx': getCkxx,
     'GET /api/getKcxx': getKcxx,
-    'POST /api/insertRkxx':insertRkxx,
+    'POST /api/addArticle':addArticle,
     'POST /api/insertCkxx':insertCkxx/*
     'POST /api/updateRkxx':insertRkxx,
     'POST /api/updateCkxx':insertCkxx */

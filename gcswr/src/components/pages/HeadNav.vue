@@ -1,5 +1,5 @@
 <template>
-  <el-menu  id = "nav" background-color="#8f97ff" text-color="#fff" active-text-color="#ffd04b" :default-active= "onRoutes" class="el-menu-demo" mode="horizontal" :router= "true">
+  <el-menu  id = "nav" background-color="#8f97ff" text-color="#fff" active-text-color="#ffd04b" :default-active= "onRoutes" class="el-menu-demo" mode="horizontal" router>
   <el-menu-item index="welcome">首页中心</el-menu-item>
     <el-menu-item index="Piction">党建活动</el-menu-item>
   <el-menu-item index="Sport">税收动态</el-menu-item>

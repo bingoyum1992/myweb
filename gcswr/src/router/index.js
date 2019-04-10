@@ -15,7 +15,6 @@ export default new router({
     },
     {
       path: '/welcome',
-      name: 'welcome',
       component: Home,
       children:[
         {
@@ -37,6 +36,10 @@ export default new router({
         {
           path: '/modifyPass',
           component: resolve => require(['../components/pages/modifyPass.vue'],resolve)
+        },
+        {
+          path: '/Manage',
+          component: resolve => require(['../components/pages/Manage.vue'],resolve)
         },
 
 

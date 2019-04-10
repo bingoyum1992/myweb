@@ -22,11 +22,15 @@
     data() {
       return {
         activeIndex: '1',
+        currentDate:'2019-4-10'
       };
     },
     methods: {
       handleSelect(key, keyPath) {
         console.log(key, keyPath);
+      },
+      articleDetail(){
+
       }
     }
   }

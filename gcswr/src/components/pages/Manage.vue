@@ -1,51 +1,100 @@
 <template>
     <el-row class="content">
-        <el-row>
-            <el-input
-                v-model="name"
-                placeholder="密码"
-                type="text">
-            </el-input>
-            <el-input
-                v-model="password"
-                placeholder="确认密码"
-                type="password">
-            </el-input>
-            <el-button type='primary' @click="login">确认</el-button>
-        </el-row>
+       <el-col :span="24" class="warp-main">
+        <el-form ref="infoForm" :model="infoForm" :rules="rules" label-width="120px">
+          <el-form-item label="标题" prop="title">
+            <el-input v-model="infoForm.title"></el-input>
+          </el-form-item>
+
+          <el-form-item label="描述" prop="keyword">
+            <el-input v-model="infoForm.keyword"></el-input>
+          </el-form-item>
+<!--使用编辑器
+-->
+          <el-form-item label="正文">
+            <div class="edit_container">
+              <quill-editor v-model="infoForm.content"
+                            ref="myQuillEditor"
+                            class="editer"
+                            :options="editorOption" @ready="onEditorReady($event)">
+              </quill-editor>
+            </div>
+          </el-form-item>
+
+          <el-form-item>
+            <el-button type="primary" @click="onSubmit">确认提交</el-button>
+          </el-form-item>
+        </el-form>
+      </el-col>
     </el-row>
 </template>
 
 <script>
-export default {
-  name: 'Login',
-  data () {
-    return {
-      msg: 'gcswr',
-      name: '',
-      password: ''
+import {quillEditor} from "vue-quill-editor";
+import 'quill/dist/quill.core.css';
+import 'quill/dist/quill.snow.css';
+import 'quill/dist/quill.bubble.css';
+export default{
+  name: 'Manage',
+  components:{
+    quillEditor
+  },
+  data(){
+    return{
+      editorOption: {},
+      infoForm: {
+          title: '',
+          keyword: '',
+          content:'',
+          insertname:sessionStorage.getItem('username')
+        },
+        rules: {
+          title: [
+            {required: true, message: '请输入标题', trigger: 'blur'}
+          ],
+          content: [
+            {required: true, message: '请输入详细内容', trigger: 'blur'}
+          ]
+        }
     }
   },
-  methods: {
-    login () {
-      //console.log(this.name)
-      let formdata = {
-        name: this.name,
-        password: this.password
-      }
-      this.$http.post('/user/login', formdata)
-        .then((res) => {
-					if (res.data.code === 1) {
-						this.$message({
-							type:'success',
-							message:'登录成功！'
-						})
-            sessionStorage.setItem('username', res.data.data[0].swry_dm)
-            this.$router.push('/welcome')
+  methods:{
+      onEditorBlur(quill) {
+        console.log('editor blur!', quill)
+      },
+      onEditorFocus(quill) {
+        console.log('editor focus!', quill)
+      },
+      onEditorReady(quill) {
+        console.log('editor ready!', quill)
+      },
+      onEditorChange({ quill, html, text }) {
+        console.log('editor change!', quill, html, text)
+        this.content = html
+      },
+      onSubmit() {
+        //提交
+//this.$refs.infoForm.validate，这是表单验证
+        this.$refs.infoForm.validate((valid) => {
+          if(valid) {
+            this.$http.post('/api/addArticle',this.infoForm).then(res => {
+              if(res.errCode == 200) {
+                this.$message({
+                  message: res.errMsg,
+                  type: 'success'
+                });
+                this.$router.push('/Manage');
+              } else {
+                this.$message({
+                  message: res.errMsg,
+                  type:'error'
+                });
+              }
+            });
           }
-        })
+        });
+      }
     }
-  }
 }
 </script>
 
@@ -53,8 +102,9 @@ export default {
 <style  scoped>
 .el-row.content{
     padding:16px;
-    width: 40%; 
+    width: 100%; 
     margin: auto;
+    height: 100%;
 }
 .title{
 font-size: 28px;

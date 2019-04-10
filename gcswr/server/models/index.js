@@ -38,6 +38,8 @@ let user = `create table if not exists user(
     phone varchar(100),
     intro varchar(200)
 )`
+let article = `CREATE TABLE if not exists article (id INT NOT NULL AUTO_INCREMENT,title VARCHAR(200) NOT NULL,keyword VARCHAR(200) NULL,content VARCHAR(20000) NULL,insertname VARCHAR(200) NULL, auditname VARCHAR(200) NULL, 
+catagory VARCHAR(45) NOT NULL DEFAULT 0, creattime TIMESTAMP(5) NULL DEFAULT CURRENT_TIMESTAMP,  PRIMARY KEY (id)) ENGINE = InnoDB DEFAULT CHARACTER SET = utf8`
 let inituser = `insert into user(name,password,age,sex,phone,intro) value(
     '任斌','123456',26,1,'18184100612','信息中心瓦都是')`;
 let createTable =  function(sql){
@@ -94,19 +96,17 @@ let getUserData = function(name){
     let _sql = `select * from user where name='${name}'`;
     return query(_sql)
 }
+let addArticle = function(value){
+    let _sql = `insert into article (title,keyword,content,insertname) values(?,?,?,?)`;
+    return query(_sql,value);
+}
 module.exports = {
     query,
     insertUser,
     insertLink,
     findUser,
     findUsersByPage,
-    deleteLink,
-    findAllLink,
-    findALlRkxx,
-    findALlCkxx,
-    findAllKcxx,
-    insertRkxx,
-    insertCkxx,
     query:query,
-    getUserData:getUserData
+    getUserData:getUserData,
+    addArticle:addArticle
 }
