@@ -1,9 +1,9 @@
 <template>
 <el-row>
   <el-col :span="8" v-for="article in articlelist" :key="article.id">
-    <el-card :body-style="{ padding: '0px'}" @click="articleDetail">
+    <el-card :body-style="{ padding: '0px'}">
     <img src="../../assets/logo.png" class="image">
-      <div style="padding: 14px;">
+      <div style="padding: 14px;" @click="articleDetail(article.id)">
         <span>{{article.title}}</span>
          <span>{{article.keyword}}</span>
         <div class="bottom clearfix">
@@ -29,7 +29,10 @@
       /* handleSelect(key, keyPath) {
         console.log(key, keyPath);
       }, */
-      articleDetail(){
+      articleDetail(id){
+        this.$router.replace({
+          path: `/Article/${id}`,
+        })
       },
       getArticleList(){
         const self=this;

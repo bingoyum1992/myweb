@@ -38,7 +38,7 @@ var getArticleList = async (ctx, next) => {
         });
 }
 var getArticleById = async (ctx, next) => {
-    let title = ctx.request.body["id"];
+    let id = ctx.request.query["id"];
     await userModel.getArticleById(id)
         .then(result =>{
             let res = result;

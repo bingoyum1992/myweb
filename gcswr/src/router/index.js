@@ -41,8 +41,10 @@ export default new router({
           path: '/Manage',
           component: resolve => require(['../components/pages/Manage.vue'],resolve)
         },
-
-
+        {
+          path: '/Article/:id',
+          component: resolve => require(['../components/pages/Article.vue'],resolve)
+        }
       ]
     },
   ]
