@@ -1,12 +1,13 @@
 <template>
 <el-row>
-  <el-col :span="8" v-for="(o, index) in 10" :key="o" :offset="index > 0 ? 0.1 : 0">
-    <el-card :body-style="{ padding: '0px' }" @click="articleDetail">
+  <el-col :span="8" v-for="article in articlelist" :key="article.id">
+    <el-card :body-style="{ padding: '0px'}" @click="articleDetail">
     <img src="../../assets/logo.png" class="image">
       <div style="padding: 14px;">
-        <span>云岩区税务局文章</span>
+        <span>{{article.title}}</span>
+         <span>{{article.keyword}}</span>
         <div class="bottom clearfix">
-          <time class="time">{{ currentDate }}</time>
+          <time class="time">{{ article.creattime }}</time>
           <!-- <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
       </div>
@@ -21,17 +22,42 @@
   export default {
     data() {
       return {
-        activeIndex: '1',
-        currentDate:'2019-4-10'
+       articlelist: []
       };
     },
     methods: {
-      handleSelect(key, keyPath) {
+      /* handleSelect(key, keyPath) {
         console.log(key, keyPath);
-      },
+      }, */
       articleDetail(){
-
-      }
+      },
+      getArticleList(){
+        const self=this;
+        this.$http.get('/api/getArticleList')
+        .then((res) => {
+					if (res.data.code === 1) {
+                let result = res.data.data;
+            for(var i =0;i<result.length;i++){
+              let article = {
+          id:'',
+          title:'',
+          keword:'',
+          creattime:''
+        };
+            article.id = result[i].id;
+            article.title = result[i].title;
+            article.keyword = result[i].keyword;
+            article.creattime = result[i].creattime.substr(0,10);
+            self.articlelist.push(article);
+                }        
+            }
+        }).then(function(error){
+            console.log(error);
+        })
+    }
+    },
+    mounted(){
+        this.getArticleList();
     }
   }
 </script>

@@ -78,15 +78,15 @@ export default{
         this.$refs.infoForm.validate((valid) => {
           if(valid) {
             this.$http.post('/api/addArticle',this.infoForm).then(res => {
-              if(res.errCode == 200) {
+              if(res.data.code == 1) {
                 this.$message({
-                  message: res.errMsg,
+                  message: "新增文章成功!",
                   type: 'success'
                 });
-                this.$router.push('/Manage');
+                this.$router.push('/Welcome');
               } else {
                 this.$message({
-                  message: res.errMsg,
+                  message: "失败！",
                   type:'error'
                 });
               }

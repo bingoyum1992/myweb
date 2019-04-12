@@ -16,33 +16,38 @@ var getRkxx = async (ctx, next) => {
             console.log(err);
         });
 }
-var getCkxx = async (ctx, next) => {
+var getArticleList = async (ctx, next) => {
     /* let
         name = ctx.request.body.name; */
-    await userModel.findALlCkxx()
+    await userModel.getArticleList()
         .then(result =>{
             let res = result;
             console.log(res);
             if(res.length === 0 ){
-                ctx.body = "null";
+                ctx.body = {
+                    code:-1
+                }
             }else{
-                ctx.body = res;
+                ctx.body = {
+                    code:1,
+                    data:res
+                }
             }
         }).catch(err=>{
             console.log(err);
         });
 }
-var getKcxx = async (ctx, next) => {
-    /* let
-        name = ctx.request.body.name; */
-    await userModel.findAllKcxx()
+var getArticleById = async (ctx, next) => {
+    let title = ctx.request.body["id"];
+    await userModel.getArticleById(id)
         .then(result =>{
             let res = result;
             console.log(res);
             if(res.length === 0 ){
-                ctx.body = "null";
+                ctx.body = {code:-1};
             }else{
-                ctx.body = res;
+                ctx.body = {code:1,
+                data:res}
             }
         }).catch(err=>{
             console.log(err);
@@ -60,7 +65,7 @@ var addArticle = async (ctx, next) => {
     await userModel.addArticle([title,keyword,content,insertname])
         .then(result =>{
             let res = result;
-            console.log(res);
+            console.log(res);    
             if(res.length === 0 ){
                 ctx.body = {
                     code:-1,
@@ -103,12 +108,12 @@ var insertCkxx = async (ctx, next) => {
         });
 }
 module.exports = {
-    'GET /api/getRkxx': getRkxx,
-    'GET /api/getCkxx': getCkxx,
-    'GET /api/getKcxx': getKcxx,
+    /* 'GET /api/getRkxx': getRkxx, */
+   /*  'GET /api/getCkxx': getCkxx, */
+    'GET /api/getArticleList': getArticleList,
+    'GET /api/getArticleById': getArticleById,
     'POST /api/addArticle':addArticle,
     'POST /api/insertCkxx':insertCkxx/*
     'POST /api/updateRkxx':insertRkxx,
     'POST /api/updateCkxx':insertCkxx */
-
 };

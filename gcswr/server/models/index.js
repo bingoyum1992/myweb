@@ -100,6 +100,14 @@ let addArticle = function(value){
     let _sql = `insert into article (title,keyword,content,insertname) values(?,?,?,?)`;
     return query(_sql,value);
 }
+let getArticleList = function(){
+    let _sql = `select id,title,keyword,creattime from article limit 10`;
+    return query(_sql);
+}
+let getArticleById = function(id){
+    let _sql = `select id,title,keyword,content,insertname from article where id = ${id}`;
+    return query(_sql);
+}
 module.exports = {
     query,
     insertUser,
@@ -108,5 +116,7 @@ module.exports = {
     findUsersByPage,
     query:query,
     getUserData:getUserData,
-    addArticle:addArticle
+    addArticle:addArticle,
+    getArticleList:getArticleList,
+    getArticleById:getArticleById
 }
