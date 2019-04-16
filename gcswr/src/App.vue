@@ -19,6 +19,10 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin: auto;
-  width:1366px
+  width:1366px;
+}
+body{
+  overflow: hidden;
+  overflow-y:scroll; 
 }
 </style>

@@ -1,18 +1,22 @@
 <template>
     <el-row class="content">
-        <el-row>
-            <el-input
-                v-model="name"
-                placeholder="密码"
-                type="text">
-            </el-input>
-            <el-input
-                v-model="password"
-                placeholder="确认密码"
-                type="password">
-            </el-input>
-            <el-button type='primary' @click="login">确认</el-button>
-        </el-row>
+        <el-form ref="form" :v-model="form" :rules="rules">
+        <el-form-item prop="name" label="密码">
+             <el-col :span="12">
+            <el-input v-model="form.name"></el-input>
+            </el-col>
+        </el-form-item>
+        <el-form-item prop="password" label="密码">
+             <el-col :span="12">
+            <el-input v-model="form.password"></el-input>
+            </el-col>
+        </el-form-item>
+        <el-form-item>
+            <el-button type="primary" @click="updateUser('form')">确定</el-button>
+            <el-button  @click="onCancel()">取消</el-button>
+
+        </el-form-item>
+        </el-form>
     </el-row>
 </template>
 
@@ -21,9 +25,11 @@ export default {
   name: 'Login',
   data () {
     return {
-      msg: 'gcswr',
+      form:{
+      msg: 'gswr',
       name: '',
       password: ''
+      }
     }
   },
   methods: {
@@ -53,7 +59,7 @@ export default {
 <style  scoped>
 .el-row.content{
     padding:16px;
-    width: 40%; 
+    width: 40%;
     margin: auto;
 }
 .title{
@@ -64,5 +70,8 @@ font-size: 28px;
 }
 .el-button{
     margin-top:12px
+}
+.el-form{
+    margin:auto;
 }
 </style>

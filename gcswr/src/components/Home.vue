@@ -6,11 +6,11 @@
        <el-main>
        <transition name = "move" mode="out-in"><keep-alive><router-view></router-view></keep-alive></transition>
        </el-main>
-   <el-footer>
-       <p class="foot">
-           国家税务总局贵阳市云岩区税务局
-       </p>
-   </el-footer>
+  <el-footer>
+    <p>
+      国家税务总局贵阳市云岩区税务局信息中心
+    </p>
+  </el-footer>
       </el-container>
 </template>
 

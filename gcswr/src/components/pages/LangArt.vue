@@ -1,5 +1,5 @@
 <template>
-<el-row>
+<el-row class="content">
   <el-col :span="8" v-for="article in articlelist" :key="article.id">
     <el-card :body-style="{ padding: '0px'}">
     <img src="../../assets/logo.png" class="image">
@@ -30,9 +30,10 @@
         console.log(key, keyPath);
       }, */
       articleDetail(id){
-        this.$router.replace({
-          path: `/Article/${id}`,
-        })
+        this.$router.push({
+          path: `/Article`,
+          query: { articleId: id }}
+        )
       },
       getArticleList(){
         const self=this;
@@ -67,6 +68,21 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
+.el-row.content{
+    padding:16px;
+    width: 100%; 
+    margin: auto;
+    height: 100%;
+}
+.title{
+font-size: 28px;
+}
+.el-input{
+    margin:12px 0
+}
+.el-button{
+    margin-top:12px
+}
 .el-card{
     width: 430px;
     height:56 0px;

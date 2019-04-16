@@ -42,7 +42,7 @@ export default new router({
           component: resolve => require(['../components/pages/Manage.vue'],resolve)
         },
         {
-          path: '/Article/:id',
+          path: '/Article',
           component: resolve => require(['../components/pages/Article.vue'],resolve)
         }
       ]

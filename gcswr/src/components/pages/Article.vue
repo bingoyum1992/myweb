@@ -42,7 +42,8 @@
       },
       getArticle(){
         const self=this;
-        let id = this.$route.params.id
+        let id = this.$route.query.articleId;
+        console.log(id);
         this.$http.get('/api/getArticleById',{params: {id:id}})
         .then((res) => {
             console.log(res);
