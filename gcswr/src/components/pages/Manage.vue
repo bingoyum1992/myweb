@@ -1,14 +1,7 @@
 <template>
     <el-row class="content">
        <el-col :span="24" class="warp-main">
-        <el-form ref="infoForm" :model="infoForm" :rules="rules" label-width="120px">
-          <el-form-item label="标题" prop="title">
-            <el-input v-model="infoForm.title"></el-input>
-          </el-form-item>
-
-          <el-form-item label="描述" prop="keyword">
-            <el-input v-model="infoForm.keyword"></el-input>
-          </el-form-item>
+        <el-form ref="infoForm" :model="infoForm" label-width="120px">
 <!--使用编辑器
 -->
           <el-form-item label="正文">
@@ -16,7 +9,7 @@
               <quill-editor v-model="infoForm.content"
                             ref="myQuillEditor"
                             class="editer"
-                            :options="editorOption" @ready="onEditorReady($event)">
+                            :options="editorOption" >
               </quill-editor>
             </div>
           </el-form-item>
@@ -34,45 +27,95 @@ import {quillEditor} from "vue-quill-editor";
 import 'quill/dist/quill.core.css';
 import 'quill/dist/quill.snow.css';
 import 'quill/dist/quill.bubble.css';
-export default{
-  name: 'Manage',
+
+    export default {
+         name: 'Manage',
   components:{
     quillEditor
   },
-  data(){
-    return{
-      editorOption: {},
-      infoForm: {
-          title: '',
-          keyword: '',
-          content:'',
-          insertname:sessionStorage.getItem('username')
+        data () {
+            return {
+                infoForm:{
+                    content:''
+                },
+                title: '发布文章',
+                prePage: '/',
+                postTitle: '',
+                postContent: '',
+                editorOption: {
+                    modules: {
+                        toolbar: {
+                            container:[
+                                [{ 'header': [1, 2, 3, false] }],
+                                ['bold', 'italic', 'underline', 'strike',],
+                                ['blockquote', 'code-block', 'link', 'image',],
+                                [{ 'color': [] }, { 'background': [] }],
+                                [{ 'list': 'ordered'}, { 'list': 'bullet' }, { 'align': [] }],
+                            ],
+                            handlers: {'image': this.imageHandler}
+                        }
+                    },
+                    placeholder: 'Compose an epic...',
+                    readOnly: false,
+                    theme: 'snow'
+                },
+            }
         },
-        rules: {
-          title: [
-            {required: true, message: '请输入标题', trigger: 'blur'}
-          ],
-          content: [
-            {required: true, message: '请输入详细内容', trigger: 'blur'}
-          ]
-        }
-    }
-  },
-  methods:{
-      onEditorBlur(quill) {
-        console.log('editor blur!', quill)
-      },
-      onEditorFocus(quill) {
-        console.log('editor focus!', quill)
-      },
-      onEditorReady(quill) {
-        console.log('editor ready!', quill)
-      },
-      onEditorChange({ quill, html, text }) {
-        console.log('editor change!', quill, html, text)
-        this.content = html
-      },
-      onSubmit() {
+        computed: {
+            editor() {
+                return this.$refs.myQuillEditor.quill
+            }
+        },
+        methods: {
+            onEditorBlur: function (quill) {
+                // console.log('editor blur!', quill)
+            },
+            onEditorFocus: function (quill) {
+                // console.log('editor focus!', quill)
+            },
+            onEditorChange: function ({ quill, html, text }) {
+                // console.log('editor change!', quill, html, text)
+                // this.postContent = html
+            },
+            submitPost: function () {
+                console.log(this.postTitle);
+                console.log(this.postContent);
+            },
+            imageHandler: function () {
+                let input = document.createElement('input');
+                input.setAttribute('type', 'file');
+                input.setAttribute('accept', 'image/png, image/gif, image/jpeg, image/bmp, image/x-icon');
+                input.click();
+                // 监听上传
+                input.onchange = () => {
+                    let file = input.files[0];
+                    if (/^image\//.test(file.type)) {
+                        this.saveImage(file);
+                    } else {
+                        Toast('只能上传图片哦');
+                    }
+                };
+            },
+            saveImage: function (file) {
+                let fd = new FormData();
+                fd.append('image', file);
+
+                let url = '/api/pic/add';
+                this.$http.post(url, fd).then(res => {
+                    if (res.status === 201) {
+                        this.insertImage(res.body.data)
+                    }
+                }, res => {
+                    if (res.status !== 0) {
+                        Toast(res.status + res.body.message)
+                    }
+                })
+            },
+            insertImage: function (url) {
+                let range = this.editor.getSelection();
+                this.editor.insertEmbed(range.index, 'image', url)
+            },
+             onSubmit() {
         //提交
 //this.$refs.infoForm.validate，这是表单验证
         this.$refs.infoForm.validate((valid) => {
@@ -99,7 +142,7 @@ export default{
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
-<style  scoped>
+<style>
 .el-row.content{
     padding:16px;
     width: 100%; 
