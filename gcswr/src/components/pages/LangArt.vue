@@ -2,8 +2,11 @@
 <el-row class="content">
   <el-col :span="8" v-for="article in articlelist" :key="article.id">
     <el-card :body-style="{ padding: '0px'}">
+      <router-link :to="{
+          path: `/Article`,
+          query: { articleId: article.id }}">
     <img src="../../assets/logo.png" class="image">
-      <div style="padding: 14px;" @click="articleDetail(article.id)">
+      <div style="padding: 14px;">
         <span>{{article.title}}</span>
          <span>{{article.keyword}}</span>
         <div class="bottom clearfix">
@@ -11,6 +14,7 @@
           <!-- <el-button type="text" class="button">操作按钮</el-button> -->
         </div>
       </div>
+              </router-link>
     </el-card>
   </el-col>
 </el-row>
@@ -68,6 +72,12 @@
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style  scoped>
+a {
+    text-decoration: none;
+  }
+   .router-link-active {
+    text-decoration: none;
+  }
 .el-row.content{
     padding:16px;
     width: 100%; 

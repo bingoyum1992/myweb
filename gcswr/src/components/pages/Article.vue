@@ -61,7 +61,7 @@
         })
     }
     },
-    mounted(){
+    created(){
         this.getArticle();
     },
     computed:{

@@ -19,7 +19,10 @@ export default new router({
       children:[
         {
           path: '/',
-          component: resolve => require(['../components/pages/LangArt.vue'],resolve)
+          component: resolve => require(['../components/pages/LangArt.vue'],resolve),
+          meta:{
+            keepAlive:true
+          }
         },
         {
           path: '/piction',
@@ -31,7 +34,10 @@ export default new router({
         },
         {
           path: '/userCenter',
-          component: resolve => require(['../components/pages/userCenter.vue'],resolve)
+          component: resolve => require(['../components/pages/userCenter.vue'],resolve),
+          meta:{
+            keepAlive:true
+          }
         },
         {
           path: '/modifyPass',
@@ -39,11 +45,17 @@ export default new router({
         },
         {
           path: '/Manage',
-          component: resolve => require(['../components/pages/Manage.vue'],resolve)
+          component: resolve => require(['../components/pages/Manage.vue'],resolve),
+          meta:{
+            keepAlive:true
+          }
         },
         {
           path: '/Article',
-          component: resolve => require(['../components/pages/Article.vue'],resolve)
+          component: resolve => require(['../components/pages/Article.vue'],resolve),
+          meta:{
+            keepAlive:false
+          }
         }
       ]
     },

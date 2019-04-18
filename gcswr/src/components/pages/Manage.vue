@@ -81,6 +81,32 @@ import 'quill/dist/quill.bubble.css';
                 console.log(this.postTitle);
                 console.log(this.postContent);
             },
+              /**
+       * 
+       * @param {路由} url 
+       * @param {路由参数} params 
+       * @param {文件数据} body 
+       */
+      upload(url, body = {}) {
+        // console.log(body);
+            return this.$http({
+             method: "POST",
+            url: url,
+           data: body,
+              processData: false, //必不可少参数
+              traditional: true, //比不可少参数
+              contentType: false,//比不可少参数
+               headers: {
+/*                'token': localStorage['token'],
+            'originno': config.originno, */
+            "Content-Type": false
+          }
+        }).then(
+          res => res
+        ).catch((error) => {
+          console.log(error);
+        })
+      },
             imageHandler: function () {
                 let input = document.createElement('input');
                 input.setAttribute('type', 'file');
@@ -101,10 +127,10 @@ import 'quill/dist/quill.bubble.css';
                 fd.append('image', file);
 
                 let url = '/api/pic/add';
-                this.$http.post(url, fd).then(res => {
-                    if (res.status === 201) {
-                        this.insertImage(res.body.data)
-                    }
+                this.upload(url,fd).then(res => {
+                   
+                        this.insertImage(res.body.data.filename)
+                    
                 }, res => {
                     if (res.status !== 0) {
                         Toast(res.status + res.body.message)

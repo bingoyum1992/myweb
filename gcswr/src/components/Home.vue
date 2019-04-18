@@ -4,7 +4,11 @@
    <head-nav></head-nav>
        </el-header>
        <el-main>
-       <transition name = "move" mode="out-in"><keep-alive><router-view></router-view></keep-alive></transition>
+<!--        <transition name = "move" mode="out-in">
+ -->         <keep-alive>
+           <router-view v-if="$route.meta.keepAlive"></router-view>
+         </keep-alive>
+         <router-view v-if="!$route.meta.keepAlive"></router-view><!-- </transition> -->
        </el-main>
   <el-footer>
     <p>
