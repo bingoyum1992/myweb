@@ -1,7 +1,22 @@
 const fs = require('fs');
 
 // add url-route in /controllers:
-
+const multer = require('koa-multer');//加载koa-multer模块
+//文件上传
+//配置
+var storage = multer.diskStorage({
+  //文件保存路径
+  destination: function (req, file, cb) {
+    cb(null, 'static/public/')
+  },
+  //修改文件名称
+  filename: function (req, file, cb) {
+    var fileFormat = (file.originalname).split(".");
+    cb(null,Date.now() + "." + fileFormat[fileFormat.length - 1]);
+  }
+})
+//加载配置
+var upload = multer({ storage: storage });
 function addMapping(router, mapping) {
     for (var url in mapping) {
         if (url.startsWith('GET ')) {
@@ -35,11 +50,18 @@ function addControllers(router, dir) {
         addMapping(router, mapping);
     });
 }
-
+var picadd = async(ctx,next)=>{
+    console.log('abc')
+    ctx.body = {
+      filename: ctx.req.file.filename,//返回文件名
+     filepath:ctx.req.file.path
+    }
+  }
 module.exports = function (dir) {
     let
         controllers_dir = dir || 'controllers',
         router = require('koa-router')();
+        router.post('/api/pic/add',upload.single('image'),picadd);
     addControllers(router, controllers_dir);
     return router.routes();
 };

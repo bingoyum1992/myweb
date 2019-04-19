@@ -3,7 +3,13 @@
        <el-col :span="24" class="warp-main">
         <el-form ref="infoForm" :model="infoForm" label-width="120px">
 <!--使用编辑器
--->
+-->        <el-form-item label="标题" prop="title">
+            <el-input v-model="infoForm.title"></el-input>
+          </el-form-item>
+
+          <el-form-item label="描述" prop="keyword">
+            <el-input v-model="infoForm.keyword"></el-input>
+          </el-form-item>
           <el-form-item label="正文">
             <div class="edit_container">
               <quill-editor v-model="infoForm.content"
@@ -35,9 +41,20 @@ import 'quill/dist/quill.bubble.css';
   },
         data () {
             return {
-                infoForm:{
-                    content:''
-                },
+                 infoForm: {
+           title: '',
+           keyword: '',
+            content:'',
+            insertname:sessionStorage.getItem('username')
+        },
+        rules: {
+          title: [
+            {required: true, message: '请输入标题', trigger: 'blur'}
+          ],
+          content: [
+            {required: true, message: '请输入详细内容', trigger: 'blur'}
+          ]
+        },
                 title: '发布文章',
                 prePage: '/',
                 postTitle: '',
@@ -129,11 +146,11 @@ import 'quill/dist/quill.bubble.css';
                 let url = '/api/pic/add';
                 this.upload(url,fd).then(res => {
                    
-                        this.insertImage(res.body.data.filename)
+                        this.insertImage('/public/'+res.data.filename)
                     
                 }, res => {
                     if (res.status !== 0) {
-                        Toast(res.status + res.body.message)
+                        Toast(res.status + res.message)
                     }
                 })
             },
@@ -146,6 +163,7 @@ import 'quill/dist/quill.bubble.css';
 //this.$refs.infoForm.validate，这是表单验证
         this.$refs.infoForm.validate((valid) => {
           if(valid) {
+            this.infoForm.insertname = sessionStorage.getItem('username');
             this.$http.post('/api/addArticle',this.infoForm).then(res => {
               if(res.data.code == 1) {
                 this.$message({

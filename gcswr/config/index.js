@@ -18,6 +18,10 @@ module.exports = {
       '/api':{
         target:'http://localhost:8081',
         changeorigin:true
+      },
+      '/public':{
+        target:'http://localhost:8081/static',
+        changeorigin:true
       }
     },
 
